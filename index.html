@@ -1,226 +1,193 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Compare purchases, understand costs, and make decisions that fit your needs and budget.">
-  <title>Buyer's Agent | Your Money, Your Decision</title>
+  <meta name="theme-color" content="#f7f6f0">
+  <title>Buyer's Agent — Buy with intention</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <style>
+    .topbar{display:flex;justify-content:space-between;align-items:center;max-width:1180px;margin:auto;padding:22px 24px}
+    .wordmark{font:800 1.25rem Manrope,sans-serif;color:#174d3a;text-decoration:none}
+    .nav-link{font-size:.9rem;font-weight:700;text-decoration:none}
+    .hero-wrap{max-width:1180px;margin:auto;padding:70px 24px 85px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:55px}
+    .hero-wrap h1{font-size:clamp(3rem,6vw,5.3rem);max-width:700px;margin:20px 0}
+    .hero-wrap p{font-size:1.08rem;max-width:520px;line-height:1.8}
+    .pill{display:inline-flex;background:#e7efd9;color:#174d3a;padding:8px 13px;border-radius:50px;font-size:.78rem;font-weight:800;letter-spacing:.5px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .cta{display:inline-block;padding:14px 20px;border-radius:11px;background:#174d3a;color:white;text-decoration:none;font-weight:700;border:0}
+    .cta.secondary{background:white;color:#174d3a;border:1px solid #e1e5dc}
+    .preview{background:#174d3a;border-radius:26px;padding:28px;color:white;box-shadow:0 25px 60px #174d3a20;transform:rotate(1deg)}
+    .preview *{color:inherit}
+    .preview-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.8}
+    .preview h3{font-size:1.5rem;margin:25px 0 8px}
+    .preview-card{background:#ffffff12;border:1px solid #ffffff20;border-radius:15px;padding:17px;margin-top:13px}
+    .preview-card strong{display:block;font-size:1.05rem}
+    .preview-card span{font-size:.82rem;opacity:.75}
+    .preview-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:20px;border-top:1px solid #ffffff30}
+    .preview-bottom strong{font-size:1.5rem}
+    .section-wrap{max-width:1180px;margin:auto;padding:72px 24px}
+    .section-head{max-width:690px;margin-bottom:35px}
+    .section-head h2{margin:15px 0}
+    .section-head p{font-size:1.02rem}
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .step-card{background:white;border:1px solid #e4e7df;border-radius:18px;padding:25px}
+    .step-number{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#e7efd9;color:#174d3a;font-weight:800}
+    .step-card h3{margin:22px 0 8px}
+    .tool-area{background:#eef0e7}
+    .form-shell{max-width:900px;margin:auto;background:white;border:1px solid #e4e7df;border-radius:24px;padding:clamp(20px,4vw,42px);box-shadow:0 20px 60px #173b2410}
+    .form-heading{margin-bottom:25px}
+    .form-heading h2{font-size:clamp(2rem,4vw,3rem);margin:10px 0}
+    .field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .field{min-width:0}
+    .field.full{grid-column:1/-1}
+    .field label{margin:0 0 7px;display:block;font-size:.88rem;font-weight:700;color:#26332b}
+    .field input,.field select{width:100%;min-width:0;padding:13px;border:1px solid #dfe4da;border-radius:10px;background:#fcfcfa;color:#202923}
+    .field input:focus,.field select:focus{outline:3px solid #d8f27870;border-color:#174d3a}
+    .field small{display:block;color:#7b847c;margin-top:5px;font-size:.78rem}
+    .product-label{display:flex;align-items:center;gap:9px;font-weight:800;color:#174d3a;margin:22px 0 12px}
+    .product-dot{width:10px;height:10px;border-radius:50%;background:#174d3a}
+    .product-dot.b{background:#c3a45b}
+    .form-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+    .form-actions button{padding:14px 20px;border-radius:11px;font-weight:700}
+    #purchaseForm button[type=submit]{background:#174d3a;color:white;border:0}
+    #resetButton{background:white;color:#174d3a;border:1px solid #dfe4da}
+    #result{margin-top:25px;padding:25px;border-radius:16px;background:#f2f7e9;border:1px solid #dce7cd}
+    #resultTitle{font:800 1.6rem Manrope,sans-serif;color:#174d3a}
+    #resultText{line-height:1.8}
+    #resultStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:18px}
+    #resultStats>*{padding:15px;background:white;border:1px solid #e4e7df;border-radius:12px}
+    #extraChecks{margin-top:16px}
+    .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .principle{padding:24px;border:1px solid #e4e7df;border-radius:18px;background:white}
+    .principle h3{color:#174d3a}
+    .disclaimer{font-size:.83rem;padding:14px;background:#f7f6f0;border-radius:10px;margin-top:22px}
+    .footer{background:#103729;color:white;padding:30px 24px}
+    .footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .footer p{margin:0;color:#d4e1d7;font-size:.85rem}
+    @media(max-width:800px){.hero-wrap{grid-template-columns:1fr;padding-top:45px;gap:35px}.preview{transform:none}.steps-grid,.principles-grid{grid-template-columns:1fr}.hero-wrap h1{font-size:3.2rem}}
+    @media(max-width:520px){.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar{padding:18px 20px}.hero-wrap,.section-wrap{padding-left:20px;padding-right:20px}.hero-wrap h1{font-size:2.8rem}.preview{padding:21px}.form-actions button{width:100%}}
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <a class="logo" href="#">buyer's<span>agent</span>.</a>
-    <nav class="nav-links">
-      <a href="#how">How it works</a>
-      <a href="#principles">Our principles</a>
-      <a class="nav-button" href="#tool">Try the tool</a>
-    </nav>
+  <header class="topbar">
+    <a class="wordmark" href="#">buyer's agent<span style="color:#9bbd56">.</span></a>
+    <a class="nav-link" href="#tool">Try the tool ↗</a>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero-wrap">
       <div>
-        <div class="eyebrow">A calmer way to shop</div>
-        <h1>Your money.<br>Your needs.<br><span>Your decision.</span></h1>
-        <p class="hero-text">Online shopping is designed to make buying easy. Buyer's Agent helps you slow down, compare the real cost, and decide whether a purchase makes sense for you.</p>
-        <a class="button button-primary" href="#tool">Review a purchase ↗</a>
-        <a class="button button-secondary" href="#how">How it works</a>
-        <div class="trust">✓ No sponsored rankings &nbsp; ✓ No bank connection &nbsp; ✓ You decide</div>
+        <span class="pill">A smarter way to shop</span>
+        <h1>Buy less.<br>Choose <span style="color:#58805b">better.</span></h1>
+        <p>Before you spend your money, take a step back. Compare your options, understand the real cost, and make a decision that works for you — not just for the algorithm.</p>
+        <div class="hero-actions">
+          <a class="cta" href="#tool">Compare my options ↗</a>
+          <a class="cta secondary" href="#how">How it works</a>
+        </div>
       </div>
+      <div class="preview">
+        <div class="preview-top"><span>YOUR NEXT PURCHASE</span><span>01 / 03</span></div>
+        <h3>Not just the price.<br>The whole picture.</h3>
+        <p style="font-size:.9rem;opacity:.8">A better decision starts with better questions.</p>
+        <div class="preview-card"><span>OPTION A · LOWER PRICE</span><strong>Everyday headphones</strong><span>MXN $1,200 · $12 per use</span></div>
+        <div class="preview-card"><span>OPTION B · LONGER LASTING</span><strong>Premium headphones</strong><span>MXN $1,800 · $9 per use</span></div>
+        <div class="preview-bottom"><div><span style="display:block;font-size:.8rem;opacity:.75">THE GOAL</span><strong>Value over impulse</strong></div><span style="background:#d8f278;color:#174d3a;border-radius:50px;padding:8px 12px;font-weight:800;font-size:.8rem">Shop smarter</span></div>
+      </div>
+    </section>
 
-      <div class="example-card">
-        <div class="card-heading">
-          <strong>Example purchase decision</strong>
-          <span class="tag">Illustrative only</span>
+    <section id="how" style="background:white">
+      <div class="section-wrap">
+        <div class="section-head">
+          <span class="pill">Simple by design</span>
+          <h2>Three steps.<br>One better decision.</h2>
+          <p>No complicated spreadsheets. Just a clear way to think before you buy.</p>
         </div>
-        <div class="product">
-          <div class="product-icon">👟</div>
-          <div class="product-info"><strong>Everyday sneakers</strong><small>Option A · estimated total</small></div>
-          <div class="product-price">$1,499</div>
-        </div>
-        <div class="product">
-          <div class="product-icon">👞</div>
-          <div class="product-info"><strong>Basic everyday shoes</strong><small>Option B · estimated total</small></div>
-          <div class="product-price">$899</div>
-        </div>
-        <div class="recommendation">
-          <small>What matters most</small>
-          <h3>Pause before paying.</h3>
-          <p>Compare your budget, how often you'll use the item, and the return policy before choosing.</p>
+        <div class="steps-grid">
+          <article class="step-card"><div class="step-number">01</div><h3>Set your limits</h3><p>Start with your budget and what you actually need.</p></article>
+          <article class="step-card"><div class="step-number">02</div><h3>Compare the options</h3><p>Look beyond the price: usage, payment method, and what you already own.</p></article>
+          <article class="step-card"><div class="step-number">03</div><h3>Decide with intention</h3><p>Get a recommendation that helps you consider buying, waiting, or skipping.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="how">
-      <div class="section-heading">
-        <div class="eyebrow">Three simple steps</div>
-        <h2>Make room for a better decision.</h2>
-        <p>The goal isn't to stop you from buying things. It's to help you understand what you're choosing—and what you might be giving up.</p>
-      </div>
-      <div class="steps">
-        <article class="step">
-          <div class="step-number">01 / CLARIFY</div>
-          <h3>Start with your need</h3>
-          <p>Decide whether the purchase is essential, useful, or mostly an impulse.</p>
-        </article>
-        <article class="step">
-          <div class="step-number">02 / COMPARE</div>
-          <h3>Look beyond the price tag</h3>
-          <p>Consider total cost, expected use, affordability, payment terms, and returns.</p>
-        </article>
-        <article class="step">
-          <div class="step-number">03 / CHOOSE</div>
-          <h3>Buy, wait, or skip</h3>
-          <p>Review a suggestion with clear reasons. You stay in control and can decide differently.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="tool-section" id="tool">
-      <div class="tool-layout">
-        <div class="tool-intro">
-          <div class="eyebrow">Interactive prototype</div>
-          <h2>Give a purchase a second look.</h2>
-          <p>Enter two options and your available budget. Compare affordability and estimated cost per use before making a decision.</p>
-          <div class="privacy"><strong>Privacy by design.</strong><br>This prototype does not request bank credentials, connect to stores, or send your answers to a server.</div>
-        </div>
-
-        <form class="form-card" id="purchaseForm">
-          <h3>Your purchase review</h3>
-          <p>Enter estimates in Mexican pesos (MXN). Required fields are marked.</p>
-
-          <div class="fields">
-            <div class="field full">
-              <label for="item">What are you thinking of buying? *</label>
-              <input id="item" maxlength="80" placeholder="e.g., everyday sneakers" required>
-            </div>
-            <div class="field">
-              <label for="priority">How important is it? *</label>
-              <select id="priority" required>
-                <option value="essential">Essential need</option>
-                <option value="useful" selected>Useful, but can wait</option>
-                <option value="want">Mostly a want / impulse</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="budget">Available budget (MXN) *</label>
-              <input id="budget" type="number" min="0" step="0.01" placeholder="e.g., 1500" required>
-            </div>
+    <section id="tool" class="tool-area">
+      <div class="section-wrap">
+        <div class="form-shell">
+          <div class="form-heading">
+            <span class="pill">Your personal comparison</span>
+            <h2>Let's make the call.</h2>
+            <p>Fill in what you know. Use Mexican pesos (MXN) for your prices and budget.</p>
           </div>
 
-          <div class="form-title">Option A</div>
-          <div class="fields">
-            <div class="field">
-              <label for="nameA">Option name *</label>
-              <input id="nameA" maxlength="60" placeholder="e.g., Brand A" required>
+          <form id="purchaseForm">
+            <div class="field-grid">
+              <div class="field full"><label for="item">What are you thinking of buying?</label><input id="item" name="item" placeholder="e.g. headphones, sneakers, backpack" required></div>
+              <div class="field"><label for="budget">Your budget (MXN)</label><input id="budget" name="budget" type="number" min="0" step="0.01" placeholder="e.g. 2500" required></div>
+              <div class="field"><label for="priority">What matters most?</label><select id="priority" name="priority"><option value="balanced">Overall value</option><option value="price">Lowest price</option><option value="quality">Quality and durability</option><option value="essential">I genuinely need it</option></select></div>
             </div>
-            <div class="field">
-              <label for="priceA">Total cost (MXN) *</label>
-              <input id="priceA" type="number" min="0" step="0.01" placeholder="e.g., 1499" required>
-            </div>
-            <div class="field">
-              <label for="usesA">Estimated uses per month *</label>
-              <input id="usesA" type="number" min="1" step="1" placeholder="e.g., 12" required>
-            </div>
-            <div class="field">
-              <label for="returnA">Return policy checked?</label>
-              <select id="returnA">
-                <option value="unknown">Not sure yet</option>
-                <option value="yes">Yes</option>
-                <option value="no">No / unclear</option>
-              </select>
-            </div>
-          </div>
 
-          <div class="form-title">Option B</div>
-          <div class="fields">
-            <div class="field">
-              <label for="nameB">Option name *</label>
-              <input id="nameB" maxlength="60" placeholder="e.g., Brand B" required>
+            <div class="product-label"><span class="product-dot"></span> Option A</div>
+            <div class="field-grid">
+              <div class="field"><label for="nameA">Product name</label><input id="nameA" name="nameA" placeholder="Option A" required></div>
+              <div class="field"><label for="priceA">Price (MXN)</label><input id="priceA" name="priceA" type="number" min="0" step="0.01" placeholder="1200" required></div>
+              <div class="field"><label for="usesA">Estimated number of uses</label><input id="usesA" name="usesA" type="number" min="1" step="1" placeholder="100" required><small>Estimate how many times you will use it.</small></div>
+              <div class="field"><label for="returnA">Return policy</label><select id="returnA" name="returnA"><option value="unknown">Not sure</option><option value="yes">Returns accepted</option><option value="no">No returns</option></select></div>
             </div>
-            <div class="field">
-              <label for="priceB">Total cost (MXN) *</label>
-              <input id="priceB" type="number" min="0" step="0.01" placeholder="e.g., 899" required>
-            </div>
-            <div class="field">
-              <label for="usesB">Estimated uses per month *</label>
-              <input id="usesB" type="number" min="1" step="1" placeholder="e.g., 10" required>
-            </div>
-            <div class="field">
-              <label for="returnB">Return policy checked?</label>
-              <select id="returnB">
-                <option value="unknown">Not sure yet</option>
-                <option value="yes">Yes</option>
-                <option value="no">No / unclear</option>
-              </select>
-            </div>
-          </div>
 
-          <div class="form-title">One last check</div>
-          <div class="fields">
-            <div class="field">
-              <label for="alreadyOwn">Already own something similar?</label>
-              <select id="alreadyOwn">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-                <option value="partial">Partly / not sure</option>
-              </select>
+            <div class="product-label"><span class="product-dot b"></span> Option B</div>
+            <div class="field-grid">
+              <div class="field"><label for="nameB">Product name</label><input id="nameB" name="nameB" placeholder="Option B" required></div>
+              <div class="field"><label for="priceB">Price (MXN)</label><input id="priceB" name="priceB" type="number" min="0" step="0.01" placeholder="1800" required></div>
+              <div class="field"><label for="usesB">Estimated number of uses</label><input id="usesB" name="usesB" type="number" min="1" step="1" placeholder="200" required><small>Use a realistic estimate, not the ideal scenario.</small></div>
+              <div class="field"><label for="returnB">Return policy</label><select id="returnB" name="returnB"><option value="unknown">Not sure</option><option value="yes">Returns accepted</option><option value="no">No returns</option></select></div>
             </div>
-            <div class="field">
-              <label for="payment">How would you pay?</label>
-              <select id="payment">
-                <option value="cash">Money already available</option>
-                <option value="credit">Credit card paid in full</option>
-                <option value="installments">Installments / financing</option>
-                <option value="debt">Would need to borrow or miss another payment</option>
-              </select>
+
+            <div class="field-grid" style="margin-top:22px">
+              <div class="field"><label for="payment">How would you pay?</label><select id="payment" name="payment"><option value="debit">Debit card / cash</option><option value="credit">Credit card — pay in full</option><option value="installments">Installments / financing</option></select></div>
+              <div class="field"><label for="alreadyOwn">Do you already own something similar?</label><select id="alreadyOwn" name="alreadyOwn"><option value="no">No</option><option value="yes">Yes, and it still works</option><option value="replace">Yes, but it needs replacing</option></select></div>
             </div>
-          </div>
 
-          <div class="form-buttons">
-            <button class="button button-primary" type="submit">Review my options ↗</button>
-            <button class="button button-secondary" type="reset" id="resetButton">Start over</button>
-          </div>
+            <div class="form-actions">
+              <button type="submit">Compare my options ↗</button>
+              <button type="reset" id="resetButton">Start over</button>
+            </div>
+          </form>
 
-          <div class="result" id="result" role="status" aria-live="polite">
-            <div class="eyebrow">Your decision prompt</div>
+          <div id="result" hidden aria-live="polite">
             <h3 id="resultTitle"></h3>
             <p id="resultText"></p>
-            <p id="resultStats"></p>
-            <p id="extraChecks"></p>
-            <p><small>This is an educational prototype, not financial advice. Results use your estimates and cannot verify live prices, product quality, or your full financial situation.</small></p>
+            <div id="resultStats"></div>
+            <div id="extraChecks"></div>
           </div>
-        </form>
+          <p class="disclaimer">This is an educational decision-support prototype. Prices and product details are entered by you; they are not live market data. The tool does not connect to your bank or provide financial advice.</p>
+        </div>
       </div>
     </section>
 
-    <section id="principles">
-      <div class="section-heading">
-        <div class="eyebrow">Our principles</div>
-        <h2>Helpful should not mean controlling.</h2>
-        <p>Recommendation systems can shape what people want. This prototype puts transparency and user choice first.</p>
+    <section style="background:white">
+      <div class="section-wrap">
+        <div class="section-head">
+          <span class="pill">Our principles</span>
+          <h2>Your money.<br>Your decision.</h2>
+          <p>The goal is not to stop you from buying things. It is to help you make choices you feel good about later.</p>
+        </div>
+        <div class="principles-grid">
+          <article class="principle"><h3>01. No pressure</h3><p>The recommendation can be to buy, wait, or skip. Spending is not always the answer.</p></article>
+          <article class="principle"><h3>02. Full context</h3><p>Budget, cost per use, payment method, and existing alternatives all matter.</p></article>
+          <article class="principle"><h3>03. You stay in control</h3><p>The tool offers a perspective, not an order. You make the final decision.</p></article>
+        </div>
       </div>
-      <div class="principles">
-        <article class="principle"><h3>01. No paid placement</h3><p>Options are not ranked because a store pays us. This prototype has no ads or affiliate links.</p></article>
-        <article class="principle"><h3>02. No unnecessary data</h3><p>We don't request bank logins or account access. Your entries are not sent to a server.</p></article>
-        <article class="principle"><h3>03. “Wait” is a valid result</h3><p>The tool can recommend delaying or skipping a purchase instead of pushing a sale.</p></article>
-        <article class="principle"><h3>04. You make the final call</h3><p>We explain the suggestion. You can disagree and choose what works for you.</p></article>
-      </div>
-    </section>
-
-    <section class="closing">
-      <div>
-        <h2>The best purchase might be the one you decide not to make.</h2>
-        <p>Buyer's Agent is a student prototype exploring how technology can support better choices without optimizing people into buying more.</p>
-      </div>
-      <a class="button" href="#tool">Review a purchase ↑</a>
     </section>
   </main>
 
-  <footer>
-    <span>© 2026 Buyer's Agent · Week 10 prototype</span>
-    <span>Educational project · No live prices or financial advice</span>
-  </footer>
+  <footer class="footer"><div class="footer-inner"><a class="wordmark" href="#" style="color:white">buyer's agent.</a><p>Spend intentionally. Choose confidently. © 2026 Buyer’s Agent</p></div></footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
+
