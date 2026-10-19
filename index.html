@@ -1,253 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buyer's Agent | Shop with intention</title>
-<style>
-:root{--green:#315b47;--cream:#f6f4ed;--ink:#24342c;--muted:#6c786f;--lime:#dcedad;--white:#fffefa;--line:#dce0d6}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
-header{height:75px;padding:0 8%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
-.logo{font-size:18px;font-weight:700;letter-spacing:-.5px}.logo span{display:inline-grid;place-items:center;background:var(--green);color:white;border-radius:50%;width:31px;height:31px;margin-right:9px}
-.small{font-size:12px;color:var(--muted)}
-.hero{padding:75px 9%;display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center;min-height:490px}
-.eyebrow{font-size:10px;letter-spacing:2px;font-weight:bold;color:var(--green)}
-h1{font-size:clamp(42px,5vw,68px);letter-spacing:-3px;line-height:1.04;margin:18px 0}
-h1 em{font-family:Georgia,serif;font-weight:normal;color:var(--green)}
-.hero p{max-width:500px;color:var(--muted)}
-button,.button{cursor:pointer;border:0;background:var(--green);color:white;padding:14px 19px;font-weight:bold;border-radius:3px;text-decoration:none;display:inline-block}
-button:hover,.button:hover{background:#234431}
-.art{min-height:300px;display:grid;place-items:center;position:relative}
-.circle{position:absolute;width:280px;height:280px;border:1px solid #d4dbce;border-radius:50%}
-.paper{z-index:1;background:var(--white);width:250px;padding:25px;box-shadow:0 20px 55px #203b2818;transform:rotate(-3deg)}
-.paper h3{font-size:11px;letter-spacing:2px;color:var(--muted)}
-.paper div{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:13px}
-.paper strong{color:var(--green)}
-.sticker{position:absolute;right:0;top:12%;z-index:2;background:var(--lime);border-radius:50%;width:90px;height:90px;display:grid;place-items:center;text-align:center;font-size:12px;font-weight:bold;line-height:1.3;transform:rotate(8deg)}
-.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:35px 9%;background:#e9ece3}
-.principles div{padding-right:20px}.principles h3{font-size:16px;margin:8px 0}.principles p{font-size:13px;color:var(--muted);margin:0}
-main section.review{padding:75px 9%;max-width:1300px;margin:auto}
-.intro{text-align:center;max-width:600px;margin:0 auto 35px}.intro h2,.support h2{font-size:38px;line-height:1.1;letter-spacing:-1.5px;margin:12px 0}
-.panel{background:var(--white);border:1px solid var(--line);padding:27px;margin-bottom:20px;border-radius:4px}
-.panel h3{margin:0 0 4px}.hint{font-size:12px;color:var(--muted);margin:0 0 22px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-label{font-size:12px;font-weight:bold;display:flex;flex-direction:column;gap:7px;margin-bottom:15px}
-input,select{width:100%;padding:12px;border:1px solid #d5dbd0;border-radius:3px;background:white;color:var(--ink);font:14px Arial}
-input:focus,select:focus{outline:2px solid #8ba98c}
-.check{display:flex;flex-direction:row;align-items:center;gap:9px;margin:8px 0 0}.check input{width:auto}
-.option{padding:20px;background:#f3f5ee;border:1px solid var(--line)}
-.option:nth-child(2){background:#f7f1e7}
-.tag{font-size:10px;letter-spacing:2px;color:var(--green);font-weight:bold}
-.option h3{margin:6px 0 18px}
-.full{width:100%;margin-top:8px}
-.results{background:#e9ece3;padding:28px;margin-top:28px;border:1px solid var(--line)}
-.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.resultcard{background:var(--white);padding:18px;overflow-wrap:anywhere}
-.resultcard span{display:block;font-size:10px;letter-spacing:1px;color:var(--muted);margin-bottom:9px}
-.resultcard strong{font-size:20px}
-.resultcard p{font-size:12px;color:var(--muted);margin-bottom:0}
-.recommend{background:var(--green);color:white;padding:24px;margin-top:12px}
-.recommend .eyebrow{color:var(--lime)}.recommend h3{font-size:24px;margin:5px 0}.recommend p{font-size:14px}
-.note{font-size:11px!important;color:#dbe7dc!important}
-.actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.secondary{background:transparent;color:var(--green);border:1px solid #aebcad}
-.feedback{margin-top:15px;padding:20px;background:var(--white)}
-.feedback button{margin:4px;padding:10px 12px}
-.support{background:#e0e8dc;padding:60px 9%;display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}
-.support p{color:var(--muted);font-size:14px}
-.quote{background:var(--white);padding:25px;border:1px solid var(--line)}
-.quote blockquote{font-family:Georgia,serif;font-size:21px;margin:12px 0}
-footer{padding:25px 8%;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-[hidden]{display:none!important}
-@media(max-width:700px){header{padding:0 5%}.hero{grid-template-columns:1fr;padding:48px 7% 30px;gap:15px}.art{min-height:260px}.circle{width:235px;height:235px}.principles{grid-template-columns:1fr;padding:28px 7%;gap:20px}.principles div{border-bottom:1px solid var(--line);padding-bottom:14px}.principles div:last-child{border:0}.grid,.resultgrid,.support{grid-template-columns:1fr}main section.review{padding:50px 5%}.panel{padding:20px 15px}.intro h2,.support h2{font-size:32px}.sticker{right:2%}footer{padding:25px 6%}}
-</style>
-</head>
-<body>
-<header>
-  <div class="logo"><span>B</span> buyer's agent</div>
-  <div class="small">A calmer way to shop</div>
-</header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer's Agent | Your Money, Your Decision</title>
+  <style>
+    :root {
+      --green: #315b43;
+      --dark: #202a24;
+      --cream: #f7f6f0;
+      --muted: #69736b;
+      --lime: #dce8b4;
+      --white: #fff;
+      --border: #e0e4db;
+    }
 
-<section class="hero">
-  <div>
-    <div class="eyebrow">YOUR MONEY. YOUR CHOICE.</div>
-    <h1>Buy what you need.<br><em>Not what nudges you.</em></h1>
-    <p>A simple, independent check before you buy. Compare your options, understand the real cost, and decide whether to buy, wait, or skip.</p>
-    <a class="button" href="#review">Review a purchase →</a>
-    <p class="small">✓ No bank connection. No sponsored recommendations. You stay in control.</p>
-  </div>
-  <div class="art">
-    <div class="circle"></div>
-    <div class="paper">
-      <h3>YOUR CHECKLIST</h3>
-      <div><span>Do I need it?</span><strong>✓</strong></div>
-      <div><span>Can I afford it?</span><strong>✓</strong></div>
-      <div><span>Will I regret it?</span><strong>?</strong></div>
-      <p><em>Pause before paying.</em></p>
-    </div>
-    <div class="sticker">BUY<br>OR WAIT?</div>
-  </div>
-</section>
+    * { box-sizing: border-box; }
 
-<section class="principles">
-  <div><span class="eyebrow">01</span><h3>Compare clearly</h3><p>See price, expected use, sizing and return conditions side by side.</p></div>
-  <div><span class="eyebrow">02</span><h3>Check your budget</h3><p>Consider existing payment commitments, not just the sticker price.</p></div>
-  <div><span class="eyebrow">03</span><h3>Keep your freedom</h3><p>Waiting or deciding not to buy are valid outcomes.</p></div>
-</section>
+    html { scroll-behavior: smooth; }
 
-<main>
-<section class="review" id="review">
-  <div class="intro">
-    <div class="eyebrow">THE BUYER'S CHECK</div>
-    <h2>Make the decision yours.</h2>
-    <p class="small">Use information from the stores you are considering. This prototype does not connect to live stores or your bank.</p>
-  </div>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
 
-  <form id="buyerForm">
-    <div class="panel">
-      <h3>1. Start with your situation</h3>
-      <p class="hint">What matters before you spend?</p>
-      <div class="grid">
-        <label>What are you considering?
-          <input id="need" placeholder="e.g. trousers for work" required maxlength="100">
-        </label>
-        <label>Your total budget (MXN)
-          <input id="budget" type="number" min="0" placeholder="e.g. 1500" required>
-        </label>
-        <label>Money already committed this month (MXN)
-          <input id="commitments" type="number" min="0" value="0" required>
-        </label>
-        <label>How important is this purchase?
-          <select id="priority"><option value="essential">Essential — I need it</option><option value="useful" selected>Useful — it solves a problem</option><option value="want">Mostly a want</option></select>
-        </label>
-      </div>
-      <label class="check"><input id="alreadyOwn" type="checkbox"> I already own something that could do the same job</label>
-    </div>
+    a { text-decoration: none; color: inherit; }
 
-    <div class="panel">
-      <h3>2. Compare two options</h3>
-      <p class="hint">Enter the details from the stores you're checking. Example values are not live prices.</p>
-      <div class="grid">
-        <div class="option">
-          <span class="tag">OPTION A</span><h3>First option</h3>
-          <label>Store or source<input id="storeA" placeholder="Store name" required></label>
-          <label>Full price (MXN)<input id="priceA" type="number" min="0" placeholder="899" required></label>
-          <label>Expected uses<input id="usesA" type="number" min="1" placeholder="40" required></label>
-          <label>Size / fit<select id="fitA"><option value="clear">Clear / checked</option><option value="unclear">Not sure</option><option value="poor">Likely poor fit</option><option value="na">Not applicable</option></select></label>
-          <label>Return conditions<select id="returnsA"><option value="clear">Clear and acceptable</option><option value="unclear">Unclear — check first</option><option value="strict">Strict / difficult return</option></select></label>
-          <label>Payment method<select id="paymentA"><option value="cash">Pay in full</option><option value="installments">Installments / credit</option></select></label>
-        </div>
-        <div class="option">
-          <span class="tag">OPTION B</span><h3>Second option</h3>
-          <label>Store or source<input id="storeB" placeholder="Store name" required></label>
-          <label>Full price (MXN)<input id="priceB" type="number" min="0" placeholder="1199" required></label>
-          <label>Expected uses<input id="usesB" type="number" min="1" placeholder="80" required></label>
-          <label>Size / fit<select id="fitB"><option value="clear">Clear / checked</option><option value="unclear">Not sure</option><option value="poor">Likely poor fit</option><option value="na">Not applicable</option></select></label>
-          <label>Return conditions<select id="returnsB"><option value="clear">Clear and acceptable</option><option value="unclear">Unclear — check first</option><option value="strict">Strict / difficult return</option></select></label>
-          <label>Payment method<select id="paymentB"><option value="cash">Pay in full</option><option value="installments">Installments / credit</option></select></label>
-        </div>
-      </div>
-      <p class="hint">Include shipping and fees in the full price when known. Check the store's real terms before deciding.</p>
-    </div>
-    <button class="full" type="submit">Review my options →</button>
-  </form>
+    button, input, select { font: inherit; }
 
-  <section id="results" class="results" hidden aria-live="polite">
-    <div class="eyebrow">YOUR DECISION BRIEF</div>
-    <h2>Pause and compare.</h2>
-    <p id="resultIntro"></p>
-    <div class="resultgrid">
-      <div class="resultcard"><span>BUDGET AVAILABLE</span><strong id="budgetResult"></strong><p id="budgetDetail"></p></div>
-      <div class="resultcard"><span>COST PER USE</span><strong id="costResult"></strong><p id="costDetail"></p></div>
-      <div class="resultcard"><span>WHAT TO CHECK</span><strong id="riskResult"></strong><p id="riskDetail"></p></div>
-    </div>
-    <div class="recommend"><div class="eyebrow">A SUGGESTED NEXT STEP</div><h3 id="recommendationTitle"></h3><p id="recommendationText"></p><p class="note">This is a checklist-based suggestion, not financial advice or a live product review. You make the final decision.</p></div>
-    <div class="actions"><button class="secondary" type="button" id="editButton">Edit my answers</button><button class="secondary" type="button" id="feedbackButton">Give feedback</button></div>
-    <div id="feedbackBox" class="feedback" hidden><h3>Was this review useful?</h3><p class="small">Your feedback stays in this browser demo. It is not sent to a team.</p><button type="button" data-feedback="Yes, it helped">Yes, it helped</button><button type="button" data-feedback="Somewhat">Somewhat</button><button type="button" data-feedback="Not yet">Not yet</button><p id="feedbackMessage" role="status"></p></div>
-  </section>
-</section>
-</main>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      border-bottom: 1px solid var(--border);
+    }
 
-<section class="support">
-  <div><div class="eyebrow">WHEN IT'S NOT CLEAR</div><h2>Some decisions need a human.</h2><p>If prices, payment terms, fit, or return policies are unclear, pause and ask the store or someone you trust before paying.</p></div>
-  <div class="quote"><div class="eyebrow">HUMAN CHECK</div><blockquote>“Can you confirm the total price, payment terms, and return policy before I decide?”</blockquote><button id="copyMessage" type="button">Copy question ↗</button><p id="copyStatus" class="small" role="status"></p></div>
-</section>
-<footer><div class="logo"><span>B</span> buyer's agent</div><p class="small">Independent by design. Your priorities come first.</p><p class="small">Week 10 prototype · Isle of Happiness</p></footer>
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
 
-<script>
-const $ = id => document.getElementById(id);
-const money = value => new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:2}).format(value);
+    .logo span { color: var(--green); }
 
-function getOption(letter){
-  const price=Number($("price"+letter).value);
-  const uses=Number($("uses"+letter).value);
-  return {letter,store:$("store"+letter).value.trim(),price,uses,cost:price/uses,fit:$("fit"+letter).value,returns:$("returns"+letter).value,payment:$("payment"+letter).value};
-}
-function getRisks(o){
-  const risks=[];
-  if(o.fit==="unclear")risks.push("confirm size/fit");
-  if(o.fit==="poor")risks.push("fit may be a problem");
-  if(o.returns==="unclear")risks.push("verify return conditions");
-  if(o.returns==="strict")risks.push("returns may be difficult");
-  if(o.payment==="installments")risks.push("check total credit cost and payment dates");
-  return risks;
-}
-$("buyerForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const budget=Number($("budget").value);
-  const commitments=Number($("commitments").value);
-  const available=budget-commitments;
-  const a=getOption("A"),b=getOption("B");
-  if(!Number.isFinite(available)||available<0||[a.price,b.price].some(n=>!Number.isFinite(n)||n<0)||[a.uses,b.uses].some(n=>!Number.isFinite(n)||n<1)){
-    alert("Please check your budget, commitments, prices and expected uses. Your commitments cannot exceed your budget.");return;
-  }
-  const risksA=getRisks(a),risksB=getRisks(b),risks=[...risksA.map(x=>"A: "+x),...risksB.map(x=>"B: "+x)];
-  const withinA=a.price<=available,withinB=b.price<=available;
-  const cheaperUse=a.cost<=b.cost?a:b;
-  let title="WAIT — verify the details first";
-  let text="Confirm the full price, fit and return terms before paying. A lower price alone does not make an option right for you.";
-  if($("alreadyOwn").checked&&$("priority").value!=="essential"){
-    title="WAIT — check whether you need another one";
-    text="You already own something that may do the same job. Try using it first unless this purchase solves a clear problem.";
-  }else if(!withinA&&!withinB){
-    title="SKIP FOR NOW — both exceed your available budget";
-    text="Your available budget is "+money(available)+". Consider waiting, saving, or finding a suitable lower-cost alternative.";
-  }else if(risks.length){
-    text="Before deciding, resolve these questions: "+risks.join("; ")+". If the store cannot clarify them, waiting is reasonable.";
-  }else if($("priority").value==="want"){
-    title="WAIT — give the decision some time";
-    text="You described this as mostly a want. Pause and decide later whether it is still worthwhile and fits your budget.";
-  }else{
-    const possible=[a,b].filter(o=>o.price<=available).sort((x,y)=>x.cost-y.cost);
-    const best=possible[0];
-    title="CONSIDER OPTION "+best.letter+" — if it meets your need";
-    text=best.store+" fits your available budget and has an estimated cost of "+money(best.cost)+" per use. Check that your usage estimate is realistic. You can still wait or buy neither.";
-  }
-  $("resultIntro").textContent="Review for “"+$("need").value.trim()+"”. Calculations use only the information you entered.";
-  $("budgetResult").textContent=money(available);
-  $("budgetDetail").textContent="After commitments. A: "+(withinA?"within budget":"over budget")+"; B: "+(withinB?"within budget":"over budget")+".";
-  $("costResult").textContent=money(cheaperUse.cost);
-  $("costDetail").textContent="Lower estimate: Option "+cheaperUse.letter+". A: "+money(a.cost)+" per use; B: "+money(b.cost)+" per use.";
-  $("riskResult").textContent=risks.length?risks.length+" item(s)":"No flags entered";
-  $("riskDetail").textContent=risks.length?risks.join("; "):"You marked fit and returns as clear. Confirm actual store policies.";
-  $("recommendationTitle").textContent=title;
-  $("recommendationText").textContent=text;
-  $("results").hidden=false;
-  $("feedbackBox").hidden=true;
-  $("results").scrollIntoView({behavior:"smooth",block:"start"});
-});
-$("editButton").addEventListener("click",()=>{$("review").scrollIntoView({behavior:"smooth"});$("need").focus({preventScroll:true});});
-$("feedbackButton").addEventListener("click",()=>{$("feedbackBox").hidden=!$("feedbackBox").hidden;});
-document.querySelectorAll("[data-feedback]").forEach(button=>button.addEventListener("click",()=>{
-  $("feedbackMessage").textContent="Thanks — “"+button.dataset.feedback+"”. No data was sent.";
-}));
-$("copyMessage").addEventListener("click",async()=>{
-  const message="Can you confirm the total price, payment terms, and return policy before I decide?";
-  try{await navigator.clipboard.writeText(message);$("copyStatus").textContent="Copied.";}
-  catch(error){$("copyStatus").textContent=message;}
-});
-</script>
-</body>
-</html>
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      margin-left: 22px;
+    }
+
+    .nav-button {
+      background: var(--green);
+      color: white;
+      padding: 10px 17px;
+      border-radius: 30px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      padding: 85px 7%;
+      background: linear-gradient(115deg, var(--cream) 62%, #e9eee3 62%);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1;
+      letter-spacing: -4px;
+      margin: 20px 0;
+    }
+
+    h1 span { color: var(--green); }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 500px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin: 10px 8px 0 0;
+    }
+
+    .button-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .button-secondary {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--dark);
+    }
+
+    .trust {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 24px;
+    }
+
+    .example-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 24px;
+      box-shadow: 0 15px 45px #202a2410;
+    }
+
+    .card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: var(--lime);
+      color: var(--green);
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .product {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #edf1e7;
+      border-radius: 15px;
+      font-size: 25px;
+    }
+
+    .product-info { flex: 1; }
+
+    .product-info small {
+      display: block;
+      color: var(--muted);
+    }
+
+    .product-price {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .recommendation {
+      background: var(--green);
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    .recommendation small {
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .recommendation h3 { margin: 5px 0; }
+
+    .recommendation p {
+      font-size: 13px;
+      margin-bottom: 0;
+      color: #e5ece5;
+    }
+
+    section {
+      padding: 75px 7%;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin: 12px 0;
+    }
+
+    .section-heading p,
+    .step p,
+    .principle p {
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step, .principle {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .step-number {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .step h3 { margin-bottom: 8px; }
+
+    .tool-section { background: #e9eee3; }
+
+    .tool-layout {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .tool-intro p { color: var(--muted); }
+
+    .privacy {
+      border-left: 3px solid var(--green);
+      padding-left: 15px;
+      font-size: 13px;
+      margin-top: 25px;
+    }
+
+    .form-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .form-card > p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-title {
+      font-weight: bold;
+      margin: 25px 0 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input, select {
+      min-width: 0;
+      width: 100%;
+      border: 1px solid #cfd6ca;
+      border-radius: 10px;
+      padding: 12px;
+      background: white;
+      color: var(--dark);
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #9ab79f;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 16px;
+      background: #edf1e7;
+      border: 1px solid #d4dfcb;
+    }
+
+    .result.show { display: block; }
+
+    .
